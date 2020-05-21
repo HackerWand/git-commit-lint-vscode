@@ -20,7 +20,11 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
       const method_key = context.globalState.get("display_method", "default");
-      let items = emojis.map(display_method[method_key]);
+      const emoji_enabled = context.globalState.get("emoji_enabled", "disabled");
+      const method = display_method[method_key];
+      let items = emojis.map(function (emoji) {
+        return method(emoji, emoji_enabled);
+      });
       // 显示选项列表，提示用户选择
       vscode.window.showQuickPick(items).then(function(selected) {
         if (selected) {
@@ -51,6 +55,14 @@ export function activate(context: vscode.ExtensionContext) {
       }
       vscode.window.showQuickPick(items).then(res => {
         context.globalState.update("display_method", res);
+      });
+    }
+  );
+  let emoji_switching = vscode.commands.registerCommand(
+    "extension.emojiEnabled",
+    (uri?) => {
+      vscode.window.showQuickPick(['enabled', 'disabled']).then(res => {
+        context.globalState.update("emoji_enabled", res);
       });
     }
   );

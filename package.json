@@ -43,6 +43,10 @@
 			{
 				"command": "extension.switching",
 				"title": "git commit lint switch"
+			},
+			{
+				"command": "extension.emojiEnabled",
+				"title": "git commit lint emoji enabled"
 			}
 		],
 		"menus": {
