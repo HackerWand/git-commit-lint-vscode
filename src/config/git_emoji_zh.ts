@@ -75,7 +75,7 @@ let emojis: Array<Emoji> = [
     tag: "refactor",
     code: ":art:",
     description: "改进代码结构/代码格式",
-    name: "优化"
+    name: "重构"
   },
   {
     emoji: "🚑",
